@@ -3,12 +3,13 @@
 
     $.fn.parallaxContent = function (method) {
 
-        var methods = {
+        let methods = {
 
             init: function (options) {
 
                 let settings = $.extend({
-                    duration: 1.5
+                    duration: 1.5,
+                    shift: 10
                 }, options);
 
 
@@ -34,7 +35,7 @@
                         animationTriggerEnd = 0,
                         offset = 0,
                         animationLength = 0,
-                        animateDuration = $this.data('parallax-shift');
+                        animateDuration = $this.data('parallax-shift') || settings.shift;
 
 
 

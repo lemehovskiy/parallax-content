@@ -11,7 +11,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             init: function init(options) {
 
                 var settings = $.extend({
-                    duration: 1.5
+                    duration: 1.5,
+                    shift: 10
                 }, options);
 
                 var scrollTop = 0,
@@ -33,7 +34,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         animationTriggerEnd = 0,
                         offset = 0,
                         animationLength = 0,
-                        animateDuration = $this.data('parallax-shift');
+                        animateDuration = $this.data('parallax-shift') || settings.shift;
 
                     $(window).on('load resize', function () {
 
