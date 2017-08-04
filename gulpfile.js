@@ -1,17 +1,16 @@
 var 	gulp         = require('gulp'),
-    autoprefixer = require('gulp-autoprefixer'),
-    filter       = require('gulp-filter'),
-    uglify       = require('gulp-uglify'),
-    rename       = require('gulp-rename'),
-    concat       = require('gulp-concat'),
-    sass         = require('gulp-sass'),
-    plumber      = require('gulp-plumber'),
-    notify       = require('gulp-notify'),
-    streamqueue  = require('streamqueue'),
-    clone = require('gulp-clone'),
-    sourcemaps   = require('gulp-sourcemaps'),
-    merge = require('merge-stream'),
-    babel = require('gulp-babel');
+        autoprefixer = require('gulp-autoprefixer'),
+        minifycss      = require('gulp-uglifycss'),
+        uglify       = require('gulp-uglify'),
+        rename       = require('gulp-rename'),
+        concat       = require('gulp-concat'),
+        sass         = require('gulp-sass'),
+        plumber      = require('gulp-plumber'),
+        notify       = require('gulp-notify'),
+        streamqueue  = require('streamqueue'),
+        sourcemaps   = require('gulp-sourcemaps'),
+        merge = require('merge-stream'),
+        babel = require('gulp-babel');
 
 
 
@@ -20,26 +19,23 @@ gulp.task('default', ['watch']);
 
 gulp.task('styles', function () {
 
-    var source = gulp.src('./demo/sass/style.scss')
-        .pipe(plumber({
-            errorHandler: notify.onError("Error: <%= error.message %>")
-        }))
-        .pipe(sourcemaps.init())
-        .pipe(sass())
-        .pipe(autoprefixer({
-            browsers: ['last 4 versions'],
-            cascade: false
-        }))
-
-
-
-    var pipe1 = source.pipe(clone())
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./demo'))
-        .pipe(notify("Styles task complete"));
-
-
-    return merge (pipe1);
+    gulp.task('styles', function () {
+        return gulp.src('./src/css/style.scss')
+            .pipe(plumber({
+                errorHandler: notify.onError("Error: <%= error.message %>")
+            }))
+            .pipe(sourcemaps.init())
+            .pipe(sass())
+            .pipe(autoprefixer({
+                browsers: ['last 5 versions'],
+                cascade: false
+            }))
+            .pipe(rename({suffix: '.min'}))
+            .pipe(minifycss())
+            .pipe(sourcemaps.write('/'))
+            .pipe(gulp.dest('./build/css'))
+            .pipe(notify("Styles task complete"));
+    });
 
 });
 

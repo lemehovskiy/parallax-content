@@ -34,7 +34,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         animationTriggerEnd = 0,
                         offset = 0,
                         animationLength = 0,
-                        animateDuration = $this.data('parallax-shift') || settings.shift;
+                        dataOptions = $this.data('parallax-content'),
+                        animateDuration = settings.duration,
+                        animateShift = settings.shift;
+
+                    if (dataOptions != undefined) {
+                        if (dataOptions.hasOwnProperty('duration')) {
+                            animateDuration = dataOptions.duration;
+                        }
+
+                        if (dataOptions.hasOwnProperty('shift')) {
+                            animateShift = dataOptions.shift;
+                        }
+                    }
 
                     $(window).on('load resize', function () {
 
@@ -57,9 +69,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                             var centerPercentShift = centerPixelShift / (animationLength / 100) * 2;
 
-                            var y = animateDuration / 100 * centerPercentShift;
+                            var y = animateShift / 100 * centerPercentShift;
 
-                            TweenLite.to($this, settings.duration, { y: y + 'px' });
+                            TweenLite.to($this, animateDuration, { y: y + 'px' });
                         } else {
                             $this.removeClass('active');
                         }

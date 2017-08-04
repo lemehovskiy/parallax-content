@@ -26,15 +26,15 @@
 <div class="parallax-section back-img" style="background-image: url('imgs/img1.jpg')">
     <div class="container">
 
-        <div class="content-wrap parallax-move" data-parallax-shift="15">
+        <div class="content-wrap parallax-move" data-parallax-content='{"shift": 10, "duration": 1}'>
             <h3 class="title">
-                <div class="line parallax-move" data-parallax-shift="10">
+                <div class="line parallax-move" data-parallax-content='{"shift": 15, "duration": 2}'>
                     Lorem ipsum dolor sit amet
                 </div>
-                <div class="line parallax-move" data-parallax-shift="15">
+                <div class="line parallax-move" data-parallax-content='{"shift": 20, "duration": 2.5}'>
                     Lorem ipsum dolor sit amet
                 </div>
-                <div class="line parallax-move" data-parallax-shift="20">
+                <div class="line parallax-move" data-parallax-content='{"shift": 25, "duration": 3}'>
                     Lorem ipsum dolor sit amet
                 </div>
             </h3>
@@ -73,7 +73,7 @@
 <script>
 
     $('.parallax-move').parallaxContent({
-        duration: 2
+
     });
 
 </script>
