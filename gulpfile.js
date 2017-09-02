@@ -20,7 +20,7 @@ gulp.task('default', ['watch']);
 gulp.task('styles', function () {
 
     gulp.task('styles', function () {
-        return gulp.src('./src/css/style.scss')
+        return gulp.src('./demo/sass/style.scss')
             .pipe(plumber({
                 errorHandler: notify.onError("Error: <%= error.message %>")
             }))
@@ -30,10 +30,8 @@ gulp.task('styles', function () {
                 browsers: ['last 5 versions'],
                 cascade: false
             }))
-            .pipe(rename({suffix: '.min'}))
-            .pipe(minifycss())
             .pipe(sourcemaps.write('/'))
-            .pipe(gulp.dest('./build/css'))
+            .pipe(gulp.dest('./demo'))
             .pipe(notify("Styles task complete"));
     });
 
@@ -65,6 +63,6 @@ gulp.task('scripts', function() {
 
 // configure which files to watch and what tasks to use on file changes
 gulp.task('watch', ['styles', 'scripts'], function() {
-    gulp.watch('demo/sass/*.scss', ['styles']);
+    gulp.watch('demo/sass/**/*.scss', ['styles']);
     gulp.watch('src/parallaxContent.es6', ['scripts']);
 });

@@ -13,54 +13,99 @@
 <body>
 
 
-<header></header>
-
-
-<div class="spacer"></div>
-
-<div class="spacer"></div>
-
-<div class="spacer"></div>
-
-
-<div class="parallax-section back-img" style="background-image: url('imgs/img1.jpg')">
+<div class="section-intro back-img" style="background-image: url('imgs/hs_err_pid689.jpg')">
     <div class="container">
-
-        <div class="content-wrap parallax-move" data-parallax-content='{"shift": 10, "duration": 1}'>
-            <h3 class="title">
-                <div class="line parallax-move" data-parallax-content='{"shift": 15, "duration": 2}'>
-                    Lorem ipsum dolor sit amet
-                </div>
-                <div class="line parallax-move" data-parallax-content='{"shift": 20, "duration": 2.5}'>
-                    Lorem ipsum dolor sit amet
-                </div>
-                <div class="line parallax-move" data-parallax-content='{"shift": 25, "duration": 3}'>
-                    Lorem ipsum dolor sit amet
-                </div>
+        <div class="content-wrap">
+            <h3 class="title parallax-move" data-parallax-content='{"shift": 40, "duration": 3}'>
+                Lorem ipsum dolor
             </h3>
-
-            <p class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex
-                ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit
-                anim id est laborum.
-            </p>
         </div>
     </div>
 </div>
 
 
-<div class="spacer"></div>
+<div class="section-features">
 
-<div class="spacer"></div>
+    <div class="container">
 
-<div class="spacer"></div>
+        <ul class="features-list">
 
-<div class="spacer"></div>
+            <li class="feature-item">
+                <div class="content-col">
+                    <div class="title">
+                        Lorem ipsum
+                    </div>
+                    <div class="desc">
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
+                            beatae vitae dicta sunt explicabo.
+                        </p>
+                        <p>
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                            odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                        </p>
+                    </div>
+                </div>
+                <div class="img-col">
+                    <div class="img-wrap back-img" style="background-image: url('imgs/pexels-photo-534327.jpg')">
+
+                    </div>
+                </div>
+            </li>
+
+            <li class="feature-item">
+                <div class="content-col">
+                    <div class="title">
+                        Lorem ipsum
+                    </div>
+                    <div class="desc">
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
+                            beatae vitae dicta sunt explicabo.
+                        </p>
+                        <p>
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                            odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                        </p>
+                    </div>
+                </div>
+                <div class="img-col">
+                    <div class="img-wrap back-img" style="background-image: url('imgs/pexels-photo-534351.jpg')">
+
+                    </div>
+                </div>
+            </li>
+
+            <li class="feature-item">
+                <div class="content-col">
+                    <div class="title">
+                        Lorem ipsum
+                    </div>
+                    <div class="desc">
+                        <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
+                            beatae vitae dicta sunt explicabo.
+                        </p>
+                        <p>
+                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+                            odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                        </p>
+                    </div>
+                </div>
+                <div class="img-col">
+                    <div class="img-wrap back-img" style="background-image: url('imgs/pexels-photo-539711.jpg')">
+
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+</div>
 
 
 <script src="js/jquery-3.2.0.min.js"></script>
@@ -73,6 +118,16 @@
 <script>
 
     $('.parallax-move').parallaxContent();
+
+    $('.features-list .title').parallaxContent({
+        duration: 2,
+        shift: 15
+    });
+
+    $('.features-list .img-col').parallaxContent({
+        duration: 2,
+        shift: -15
+    });
 
 </script>
 
