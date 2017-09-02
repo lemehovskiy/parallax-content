@@ -1,11 +1,9 @@
 {
   "name": "parallax_content",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "parallax content",
   "main": "index.js",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-uglifycss": "^1.0.6",
