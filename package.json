@@ -1,6 +1,6 @@
 {
   "name": "parallax_content",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "parallax content",
   "main": "index.js",
   "dependencies": {
@@ -29,7 +29,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "parallax", "gsap", "tweenlite", "greensock", "jquery", "parallax scroll"
+    "parallax",
+    "gsap",
+    "tweenlite",
+    "greensock",
+    "jquery",
+    "parallax scroll"
   ],
   "repository": {
     "type": "git",
