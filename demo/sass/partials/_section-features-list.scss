@@ -12,15 +12,16 @@
     }
 
     &:nth-child(3n+1) .content-col {
-      background: #07514A;
+      background: #A5B5AA;
     }
 
     &:nth-child(3n+2) .content-col {
-      background: #296F8C;
+
+      background: #6C6B7A;
     }
 
     &:nth-child(3n+3) .content-col {
-      background: #A5B5AA;
+      background: #296F8C;
     }
 
     &:nth-child(even) {
@@ -67,6 +68,16 @@
         top: -20px;
         width: calc(100% + 40px);
         height: calc(100% + 40px);
+
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.15);
+        }
       }
     }
   }
