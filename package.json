@@ -3,7 +3,10 @@
   "version": "1.0.1",
   "description": "parallax content",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "gsap": "^1.20.2",
+    "jquery": ">=1.7"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-uglifycss": "^1.0.6",
@@ -26,8 +29,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "theme"
+    "parallax", "gsap", "tweenlite", "greensock", "jquery", "parallax scroll"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lemehovskiy/parallaxContent"
+  },
   "author": "lemehovskiy",
   "license": "ISC"
 }
