@@ -1,12 +1,12 @@
 parallaxContent
 -------
 
-###Demo
+### Demo
 
 [https://lemehovskiy.github.io/parallaxContent/demo](https://lemehovskiy.github.io/parallaxContent/demo/)
 
 
-###Data Attribute Settings
+### Data Attribute Settings
 
 
 In parallaxContent you can now add settings using the data-parallax-content attribute. You still need to call
@@ -36,6 +36,6 @@ duration | int | 1.5
 * IE10/11
 
 
-###Dependencies
+### Dependencies
 
 * jQuery 1.7
