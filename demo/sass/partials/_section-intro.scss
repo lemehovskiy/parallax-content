@@ -21,5 +21,6 @@
     font-size: 50px;
     text-transform: uppercase;
     font-weight: 600;
+    @include vw-font-size(600, 50);
   }
 }

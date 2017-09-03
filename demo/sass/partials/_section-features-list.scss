@@ -1,14 +1,22 @@
 .section-features {
+  $mobile-size: 800px;
+
   .container {
     padding: 100px 0;
     max-width: 1000px;
   }
 
   .feature-item {
-    display: flex;
+    @media (min-width: $mobile-size + 1px) {
+      display: flex;
+    }
 
     + .feature-item {
       padding: 100px 0 0;
+
+      @media (max-width: $mobile-size) {
+        padding: 70px 0 0;
+      }
     }
 
     &:nth-child(3n+1) .content-col {
@@ -24,12 +32,14 @@
       background: #296F8C;
     }
 
-    &:nth-child(even) {
-      flex-direction: row-reverse;
-      .img-col {
-        .img-wrap {
-          right: auto;
-          left: 0;
+    @media (min-width: $mobile-size + 1px) {
+      &:nth-child(even) {
+        flex-direction: row-reverse;
+        .img-col {
+          .img-wrap {
+            right: auto;
+            left: 0;
+          }
         }
       }
     }
@@ -51,16 +61,30 @@
     }
 
     .content-col {
-      width: 50%;
       color: white;
       padding: 50px;
       z-index: 1;
       position: relative;
+
+      @media (max-width: $mobile-size) {
+        padding: 30px;
+      }
+
+      @media (min-width: $mobile-size + 1px) {
+        width: 50%;
+      }
     }
 
     .img-col {
-      width: 50%;
       position: relative;
+
+      @media (min-width: $mobile-size + 1px) {
+        width: 50%;
+      }
+
+      @media (max-width: $mobile-size) {
+        min-height: 400px;
+      }
 
       .img-wrap {
         position: absolute;
@@ -68,6 +92,11 @@
         top: -20px;
         width: calc(100% + 40px);
         height: calc(100% + 40px);
+
+        @media (max-width: $mobile-size) {
+          right: -20px;
+        }
+
 
         &:before {
           content: '';

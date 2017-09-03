@@ -17,7 +17,7 @@ to initialize parallaxContent on the element.
 Example:
 
 ```html
-<div data-parallax-conten='{"shift": 10, "duration": 4}'></div>
+<div data-parallax-content='{"shift": 10, "duration": 4}'></div>
 ```
 
 
@@ -39,3 +39,4 @@ duration | int | 1.5
 ### Dependencies
 
 * jQuery 1.7
+* Gsap

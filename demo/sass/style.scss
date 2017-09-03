@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,600');
 
 @import "_reset.scss";
+@import "mixins.scss";
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -18,6 +19,10 @@ body {
 .container {
   margin: auto;
 
+}
+
+section {
+  padding: 0 20px;
 }
 
 .rect-outer {
