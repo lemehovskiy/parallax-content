@@ -6,6 +6,13 @@ parallaxContent
 [https://lemehovskiy.github.io/parallaxContent/demo](https://lemehovskiy.github.io/parallaxContent/demo/)
 
 
+### Package Managers
+
+```sh
+# NPM
+npm install parallax_content
+```
+
 ### Data Attribute Settings
 
 
