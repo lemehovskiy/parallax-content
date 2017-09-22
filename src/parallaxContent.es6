@@ -1,3 +1,24 @@
+/*
+
+ Parallax Color Bars
+
+ Author: lemehovskiy
+ Website: https://github.com/lemehovskiy
+
+*/
+
+;(function (factory) {
+    'use strict';
+
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof exports !== 'undefined') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(jQuery);
+    }
+})
+
 (function ($) {
 
     $.fn.parallaxContent = function (method) {
@@ -77,7 +98,7 @@
                             let y = animateShift / 100 * centerPercentShift;
 
                             TweenLite.to($this, animateDuration, {y: y + 'px'});
-                            
+
                         }
 
                         else {
@@ -85,9 +106,9 @@
                         }
 
                     })
-                    
+
                 });
-              
+
             }
         };
 
@@ -101,5 +122,4 @@
         }
     };
 
-
-})(jQuery);
+});

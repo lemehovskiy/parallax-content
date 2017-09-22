@@ -2,7 +2,7 @@
   "name": "parallax_content",
   "version": "1.0.3",
   "description": "parallax content",
-  "main": "index.js",
+  "main": "build/parallaxContent.js",
   "dependencies": {
     "gsap": "^1.20.2",
     "jquery": ">=1.7"
