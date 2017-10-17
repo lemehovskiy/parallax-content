@@ -4,10 +4,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /*
 
- Parallax Color Bars
+ Parallax Content
 
  Author: lemehovskiy
- Website: https://github.com/lemehovskiy
+ Version: 1.0.5
+ Repo: https://github.com/lemehovskiy/parallaxContent
+ Demo: https://lemehovskiy.github.io/parallaxContent/demo
 
 */
 
