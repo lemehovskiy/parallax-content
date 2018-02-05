@@ -3,7 +3,7 @@ parallaxContent
 
 ### Demo
 
-[https://lemehovskiy.github.io/parallaxContent/demo](https://lemehovskiy.github.io/parallaxContent/demo/)
+[https://lemehovskiy.github.io/parallax_content/demo](https://lemehovskiy.github.io/parallax_content/demo/)
 
 
 ### Package Managers
