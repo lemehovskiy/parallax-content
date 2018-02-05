@@ -8,7 +8,6 @@
 'use strict';
 
 (function ($) {
-
     class ParallaxContent {
 
         constructor(element, options) {
@@ -27,65 +26,73 @@
             self.data_options = self.$element.data('parallax-content');
             self.settings = $.extend(true, self.settings, self.data_options);
 
+            self.scrollTop = 0;
+            self.windowHeight = 0;
+            self.triggerPosition = 0;
 
+            self.thisHeight = self.$element.outerHeight();
+            self.animationTriggerStart = 0;
+            self.animationTriggerEnd = 0;
+            self.offset_top = 0;
+            self.animationLength = 0;
 
-            let scrollTop = 0,
-                windowHeight = 0,
-                triggerPosition = 0;
+            self.init();
+        }
 
-
-            $(window).on('scroll load', function () {
-                scrollTop = $(window).scrollTop();
-                windowHeight = $(window).height();
-
-                triggerPosition = scrollTop + windowHeight;
-            });
-
-
-            let thisHeight = self.$element.outerHeight(),
-                animationTriggerStart = 0,
-                animationTriggerEnd = 0,
-                offset = 0,
-                animationLength = 0,
-
-                animateDuration = self.settings.duration,
-                animateShift = self.settings.shift;
-
-
-            $(window).on('load resize', function () {
-
-                offset = self.$element.offset();
-
-                animationTriggerStart = offset.top;
-
-                animationTriggerEnd = animationTriggerStart + windowHeight;
-
-                animationLength = animationTriggerEnd - animationTriggerStart;
-            });
-
+        init(){
+            let self = this;
 
             $(window).on('scroll resize load', function () {
-
-                if (triggerPosition > animationTriggerStart && triggerPosition < animationTriggerEnd + thisHeight) {
-
-                    self.$element.addClass('active');
-
-                    let centerPixelShift = triggerPosition - offset.top - (animationLength * 0.5);
-
-                    let centerPercentShift = centerPixelShift / (animationLength / 100) * 2;
-
-                    let y = animateShift / 100 * centerPercentShift;
-
-                    TweenLite.to(self.$element, animateDuration, {y: y + 'px'});
-
-                }
-
-                else {
-                    self.$element.removeClass('active');
-                }
-
+                self.update_trigger();
+                self.animate_element();
             })
+        }
 
+        refresh(){
+            let self = this;
+
+            self.update_trigger();
+            self.animate_element();
+        }
+
+        update_trigger(){
+            let self = this;
+
+            self.scrollTop = $(window).scrollTop();
+
+            self.windowHeight = $(window).height();
+
+            self.triggerPosition = self.scrollTop + self.windowHeight;
+
+            self.offset_top = self.$element.offset().top;
+
+            self.animationTriggerStart = self.offset_top;
+
+            self.animationTriggerEnd = self.animationTriggerStart + self.windowHeight;
+
+            self.animationLength = self.animationTriggerEnd - self.animationTriggerStart;
+        }
+
+        animate_element() {
+            let self = this;
+
+            if (self.triggerPosition > self.animationTriggerStart && self.triggerPosition < self.animationTriggerEnd + self.thisHeight) {
+
+                self.$element.addClass('active');
+
+                let centerPixelShift = self.triggerPosition - self.offset_top - (self.animationLength * 0.5);
+
+                let centerPercentShift = centerPixelShift / (self.animationLength / 100) * 2;
+
+                let y = self.settings.shift / 100 * centerPercentShift;
+
+                TweenLite.to(self.$element, self.settings.duration, {y: y + 'px'});
+
+            }
+
+            else {
+                self.$element.removeClass('active');
+            }
         }
     }
 

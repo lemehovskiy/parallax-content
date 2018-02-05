@@ -79,74 +79,103 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (function ($) {
-    var ParallaxContent = function ParallaxContent(element, options) {
-        _classCallCheck(this, ParallaxContent);
+    var ParallaxContent = function () {
+        function ParallaxContent(element, options) {
+            _classCallCheck(this, ParallaxContent);
 
-        var self = this;
+            var self = this;
 
-        self.$element = $(element);
+            self.$element = $(element);
 
-        //extend by function call
-        self.settings = $.extend(true, {
-            duration: 1.5,
-            shift: 10
-        }, options);
+            //extend by function call
+            self.settings = $.extend(true, {
+                duration: 1.5,
+                shift: 10
+            }, options);
 
-        //extend by data options
-        self.data_options = self.$element.data('parallax-content');
-        self.settings = $.extend(true, self.settings, self.data_options);
+            //extend by data options
+            self.data_options = self.$element.data('parallax-content');
+            self.settings = $.extend(true, self.settings, self.data_options);
 
-        var scrollTop = 0,
-            windowHeight = 0,
-            triggerPosition = 0;
+            self.scrollTop = 0;
+            self.windowHeight = 0;
+            self.triggerPosition = 0;
 
-        $(window).on('scroll load', function () {
-            scrollTop = $(window).scrollTop();
-            windowHeight = $(window).height();
+            self.thisHeight = self.$element.outerHeight();
+            self.animationTriggerStart = 0;
+            self.animationTriggerEnd = 0;
+            self.offset_top = 0;
+            self.animationLength = 0;
 
-            triggerPosition = scrollTop + windowHeight;
-        });
+            self.init();
+        }
 
-        var thisHeight = self.$element.outerHeight(),
-            animationTriggerStart = 0,
-            animationTriggerEnd = 0,
-            offset = 0,
-            animationLength = 0,
-            animateDuration = self.settings.duration,
-            animateShift = self.settings.shift;
+        _createClass(ParallaxContent, [{
+            key: 'init',
+            value: function init() {
+                var self = this;
 
-        $(window).on('load resize', function () {
-
-            offset = self.$element.offset();
-
-            animationTriggerStart = offset.top;
-
-            animationTriggerEnd = animationTriggerStart + windowHeight;
-
-            animationLength = animationTriggerEnd - animationTriggerStart;
-        });
-
-        $(window).on('scroll resize load', function () {
-
-            if (triggerPosition > animationTriggerStart && triggerPosition < animationTriggerEnd + thisHeight) {
-
-                self.$element.addClass('active');
-
-                var centerPixelShift = triggerPosition - offset.top - animationLength * 0.5;
-
-                var centerPercentShift = centerPixelShift / (animationLength / 100) * 2;
-
-                var y = animateShift / 100 * centerPercentShift;
-
-                TweenLite.to(self.$element, animateDuration, { y: y + 'px' });
-            } else {
-                self.$element.removeClass('active');
+                $(window).on('scroll resize load', function () {
+                    self.update_trigger();
+                    self.animate_element();
+                });
             }
-        });
-    };
+        }, {
+            key: 'refresh',
+            value: function refresh() {
+                var self = this;
+
+                self.update_trigger();
+                self.animate_element();
+            }
+        }, {
+            key: 'update_trigger',
+            value: function update_trigger() {
+                var self = this;
+
+                self.scrollTop = $(window).scrollTop();
+
+                self.windowHeight = $(window).height();
+
+                self.triggerPosition = self.scrollTop + self.windowHeight;
+
+                self.offset_top = self.$element.offset().top;
+
+                self.animationTriggerStart = self.offset_top;
+
+                self.animationTriggerEnd = self.animationTriggerStart + self.windowHeight;
+
+                self.animationLength = self.animationTriggerEnd - self.animationTriggerStart;
+            }
+        }, {
+            key: 'animate_element',
+            value: function animate_element() {
+                var self = this;
+
+                if (self.triggerPosition > self.animationTriggerStart && self.triggerPosition < self.animationTriggerEnd + self.thisHeight) {
+
+                    self.$element.addClass('active');
+
+                    var centerPixelShift = self.triggerPosition - self.offset_top - self.animationLength * 0.5;
+
+                    var centerPercentShift = centerPixelShift / (self.animationLength / 100) * 2;
+
+                    var y = self.settings.shift / 100 * centerPercentShift;
+
+                    TweenLite.to(self.$element, self.settings.duration, { y: y + 'px' });
+                } else {
+                    self.$element.removeClass('active');
+                }
+            }
+        }]);
+
+        return ParallaxContent;
+    }();
 
     $.fn.parallaxContent = function () {
         var $this = this,
