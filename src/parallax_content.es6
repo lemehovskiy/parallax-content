@@ -42,7 +42,10 @@
         init(){
             let self = this;
 
-            $(window).on('scroll resize load', function () {
+            self.update_trigger();
+            self.animate_element();
+            
+            $(window).on('scroll resize', function () {
                 self.update_trigger();
                 self.animate_element();
             })
