@@ -1,8 +1,8 @@
 {
   "name": "parallax_content",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "parallax content",
-  "main": "build\/parallax_content.js",
+  "main": "build/parallax_content.js",
   "dependencies": {
     "gsap": "^1.20.2",
     "jquery": ">=1.7"
@@ -26,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https:\/\/github.com\/lemehovskiy\/parallax_content"
+    "url": "https://github.com/lemehovskiy/parallax_content"
   },
   "author": "lemehovskiy",
   "license": "ISC"
