@@ -69,9 +69,9 @@
 
 "use strict";
 /*
- Version: 1.0.5
+ Version: 1.0.6
  Author: lemehovskiy
- Website: http://lemehovskiy.github.io
+ Website: https://lemehovskiy.github.io/parallax-content
  Repo: https://github.com/lemehovskiy/parallax_content
  */
 
