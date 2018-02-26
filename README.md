@@ -71,7 +71,7 @@ npm install parallax_content
 
 ### Data Attribute Settings
 
-In parallaxContent you can now add settings using the data-parallax-content attribute. You still need to call
+In parallaxContent you can add settings using the data-parallax-content attribute. You still need to call
 $(element).parallaxContent()
 to initialize parallaxContent on the element.
 
