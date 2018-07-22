@@ -95,22 +95,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             //extend by function call
             self.settings = $.extend(true, {
                 duration: 1.5,
-                shift: 10
+                shift: 10,
+                events: ['gyro'],
+                gyro_animation: 'tilt'
             }, options);
 
             //extend by data options
             self.data_options = self.$element.data('parallax-content');
             self.settings = $.extend(true, self.settings, self.data_options);
-
             self.scrollTop = 0;
             self.windowHeight = 0;
             self.triggerPosition = 0;
-
             self.thisHeight = self.$element.outerHeight();
             self.animationTriggerStart = 0;
             self.animationTriggerEnd = 0;
             self.offset_top = 0;
             self.animationLength = 0;
+
+            self.state = {
+                isOnScreen: false
+            };
 
             self.init();
         }
@@ -121,11 +125,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var self = this;
 
                 self.update_trigger();
-                self.animate_element();
 
                 $(window).on('scroll resize', function () {
                     self.update_trigger();
-                    self.animate_element();
+                });
+
+                self.settings.events.forEach(function (event) {
+                    if (event == 'scroll') {
+                        self.subscribe_scroll_event();
+                    } else if (event == 'gyro') {
+                        self.subscribe_gyro_event();
+                    }
                 });
             }
         }, {
@@ -133,8 +143,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             value: function refresh() {
                 var self = this;
 
-                self.update_trigger();
-                self.animate_element();
+                self.animate(self.get_element_animate_position());
             }
         }, {
             key: 'update_trigger',
@@ -142,38 +151,68 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var self = this;
 
                 self.scrollTop = $(window).scrollTop();
-
                 self.windowHeight = $(window).height();
-
                 self.triggerPosition = self.scrollTop + self.windowHeight;
-
                 self.offset_top = self.$element.offset().top;
-
                 self.animationTriggerStart = self.offset_top;
-
                 self.animationTriggerEnd = self.animationTriggerStart + self.windowHeight;
-
                 self.animationLength = self.animationTriggerEnd - self.animationTriggerStart;
-            }
-        }, {
-            key: 'animate_element',
-            value: function animate_element() {
-                var self = this;
 
                 if (self.triggerPosition > self.animationTriggerStart && self.triggerPosition < self.animationTriggerEnd + self.thisHeight) {
-
                     self.$element.addClass('active');
-
-                    var centerPixelShift = self.triggerPosition - self.offset_top - self.animationLength * 0.5;
-
-                    var centerPercentShift = centerPixelShift / (self.animationLength / 100) * 2;
-
-                    var y = self.settings.shift / 100 * centerPercentShift;
-
-                    TweenLite.to(self.$element, self.settings.duration, { y: y + 'px' });
+                    self.state.isOnScreen = true;
                 } else {
                     self.$element.removeClass('active');
+                    self.state.isOnScreen = false;
                 }
+            }
+        }, {
+            key: 'subscribe_gyro_event',
+            value: function subscribe_gyro_event() {
+                var self = this,
+                    last_gamma = 0,
+                    last_beta = 0,
+                    current_timestamp = null,
+                    last_timestamp = Date.now();
+
+                window.addEventListener("deviceorientation", function (e) {
+                    if (!self.state.isOnScreen) return;
+
+                    current_timestamp = Date.now();
+                    var distance_time = current_timestamp - last_timestamp;
+                    var distance_beta = e.beta - last_beta;
+                    var speed_beta = Math.round(distance_beta / distance_time * 100);
+
+                    console.log(speed_beta);
+                    self.animate(speed_beta);
+
+                    last_beta = e.beta;
+                    last_timestamp = current_timestamp;
+                }, true);
+            }
+        }, {
+            key: 'subscribe_scroll_event',
+            value: function subscribe_scroll_event() {
+                var self = this;
+
+                $(window).on('scroll resize', function () {
+                    if (!self.state.isOnScreen) return;
+
+                    self.animate(self.get_element_animate_position());
+                });
+            }
+        }, {
+            key: 'get_element_animate_position',
+            value: function get_element_animate_position() {
+                var centerPixelShift = this.triggerPosition - this.offset_top - this.animationLength * 0.5,
+                    centerPercentShift = centerPixelShift / (this.animationLength / 100) * 2;
+
+                return this.settings.shift / 100 * centerPercentShift;
+            }
+        }, {
+            key: 'animate',
+            value: function animate(y) {
+                TweenLite.to(this.$element, this.settings.duration, { y: y + 'px' });
             }
         }]);
 

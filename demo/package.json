@@ -2,7 +2,7 @@
   "name": "parallax_content_demo",
   "version": "1.0.0",
   "description": "Parallax content",
-  "main": "build\/parallax_content.js",
+  "main": "build/parallax_content.js",
   "dependencies": [],
   "devDependencies": {
     "autoprefixer": "^7.2.3",
@@ -27,7 +27,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https:\/\/github.com\/lemehovskiy\/parallax_content"
+    "url": "https://github.com/lemehovskiy/parallax_content"
   },
   "author": "lemehovskiy",
   "license": "ISC"
