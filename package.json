@@ -1,6 +1,6 @@
 {
   "name": "parallax_content",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "parallax content",
   "main": "build/parallax_content.js",
   "dependencies": {
