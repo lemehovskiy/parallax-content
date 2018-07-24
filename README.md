@@ -88,6 +88,8 @@ Option | Type | Default
 --- | --- | ---
 shift | int | 10
 duration | int | 1.5
+events | array | ['scroll', 'gyro']
+gyroSensitivity | int | 30
 
 ### Browser support
 

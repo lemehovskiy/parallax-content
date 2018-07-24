@@ -69,7 +69,7 @@
 
 "use strict";
 /*
- Version: 1.0.6
+ Version: 1.0.7
  Author: lemehovskiy
  Website: https://lemehovskiy.github.io/parallax-content
  Repo: https://github.com/lemehovskiy/parallax_content
@@ -96,20 +96,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             self.settings = $.extend(true, {
                 duration: 1.5,
                 shift: 10,
-                events: ['gyro'],
-                gyro_animation: 'tilt'
+                events: ['scroll', 'gyro'],
+                gyroSensitivity: 30
             }, options);
 
             //extend by data options
             self.data_options = self.$element.data('parallax-content');
             self.settings = $.extend(true, self.settings, self.data_options);
+
             self.scrollTop = 0;
             self.windowHeight = 0;
             self.triggerPosition = 0;
             self.thisHeight = self.$element.outerHeight();
             self.animationTriggerStart = 0;
             self.animationTriggerEnd = 0;
-            self.offset_top = 0;
+            self.offsetTop = 0;
             self.animationLength = 0;
 
             self.state = {
@@ -124,17 +125,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             value: function init() {
                 var self = this;
 
-                self.update_trigger();
+                self.updateTrigger();
 
                 $(window).on('scroll resize', function () {
-                    self.update_trigger();
+                    self.updateTrigger();
                 });
 
                 self.settings.events.forEach(function (event) {
                     if (event == 'scroll') {
-                        self.subscribe_scroll_event();
+                        self.subscribeScrollEvent();
                     } else if (event == 'gyro') {
-                        self.subscribe_gyro_event();
+                        self.subscribeGyroEvent();
                     }
                 });
             }
@@ -143,18 +144,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             value: function refresh() {
                 var self = this;
 
-                self.animate(self.get_element_animate_position());
+                self.animate(self.getElementAnimatePosition());
             }
         }, {
-            key: 'update_trigger',
-            value: function update_trigger() {
+            key: 'updateTrigger',
+            value: function updateTrigger() {
                 var self = this;
 
                 self.scrollTop = $(window).scrollTop();
                 self.windowHeight = $(window).height();
                 self.triggerPosition = self.scrollTop + self.windowHeight;
-                self.offset_top = self.$element.offset().top;
-                self.animationTriggerStart = self.offset_top;
+                self.offsetTop = self.$element.offset().top;
+                self.animationTriggerStart = self.offsetTop;
                 self.animationTriggerEnd = self.animationTriggerStart + self.windowHeight;
                 self.animationLength = self.animationTriggerEnd - self.animationTriggerStart;
 
@@ -167,44 +168,43 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
             }
         }, {
-            key: 'subscribe_gyro_event',
-            value: function subscribe_gyro_event() {
+            key: 'subscribeGyroEvent',
+            value: function subscribeGyroEvent() {
                 var self = this,
-                    last_gamma = 0,
-                    last_beta = 0,
-                    current_timestamp = null,
-                    last_timestamp = Date.now();
+                    lastBeta = 0,
+                    currentTimestamp = null,
+                    lastTimestamp = Date.now();
 
                 window.addEventListener("deviceorientation", function (e) {
                     if (!self.state.isOnScreen) return;
 
-                    current_timestamp = Date.now();
-                    var distance_time = current_timestamp - last_timestamp;
-                    var distance_beta = e.beta - last_beta;
-                    var speed_beta = Math.round(distance_beta / distance_time * 100);
+                    currentTimestamp = Date.now();
+                    var distanceTime = currentTimestamp - lastTimestamp,
+                        distanceBeta = e.beta - lastBeta,
+                        speed_beta = Math.round(distanceBeta / distanceTime * 100),
+                        y = speed_beta / self.settings.gyroSensitivity * self.settings.shift;
 
-                    console.log(speed_beta);
-                    self.animate(speed_beta);
+                    self.animate(y);
 
-                    last_beta = e.beta;
-                    last_timestamp = current_timestamp;
+                    lastBeta = e.beta;
+                    lastTimestamp = currentTimestamp;
                 }, true);
             }
         }, {
-            key: 'subscribe_scroll_event',
-            value: function subscribe_scroll_event() {
+            key: 'subscribeScrollEvent',
+            value: function subscribeScrollEvent() {
                 var self = this;
 
                 $(window).on('scroll resize', function () {
                     if (!self.state.isOnScreen) return;
 
-                    self.animate(self.get_element_animate_position());
+                    self.animate(self.getElementAnimatePosition());
                 });
             }
         }, {
-            key: 'get_element_animate_position',
-            value: function get_element_animate_position() {
-                var centerPixelShift = this.triggerPosition - this.offset_top - this.animationLength * 0.5,
+            key: 'getElementAnimatePosition',
+            value: function getElementAnimatePosition() {
+                var centerPixelShift = this.triggerPosition - this.offsetTop - this.animationLength * 0.5,
                     centerPercentShift = centerPixelShift / (this.animationLength / 100) * 2;
 
                 return this.settings.shift / 100 * centerPercentShift;
