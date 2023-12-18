@@ -21,7 +21,7 @@ npm install parallax_content
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-<script src="parallaxBackground.umd.js"></script>
+<script src="parallaxContent.umd.js"></script>
 ```
 
 #### Set HTML
@@ -65,7 +65,7 @@ npm install parallax_content
     </script>
     <script type="text/javascript">
       //Initialize with Vanilla JavaScript
-      new ParallaxBackground(document.querySelector('.parallax-title'));
+      new ParallaxContent(document.querySelector('.parallax-title'));
       //Initialize with jQuery
       $(document).ready(function () {
         $('.parallax-title').parallaxContent();
