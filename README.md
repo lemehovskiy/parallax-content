@@ -91,7 +91,7 @@ Example:
 
 | Option          | Type  | Default            |
 | --------------- | ----- | ------------------ |
-| events          | [SCROLL, MOUSE, GYRO] | [SCROLL] |
+| events          | [SCROLL, GYRO] | [SCROLL] |
 | shift           | int   | 10                 |
 | duration        | int   | 1.5                |
 | gyroSensitivity | int   | 30                 |
