@@ -8,3 +8,5 @@ tsconfig.json
 vite.config.ts
 .github
 .eslintignore
+.prettierrc.json
+CHANGELOG.md

@@ -8,6 +8,10 @@ Features:
 * Scroll, Gyroscope events
 * Customizable shift and animation duration
 
+### Demo
+
+[Basic demo](https://codesandbox.io/p/devbox/parallax-content-basic-demo-pk4crm)
+
 ### Package Managers
 
 ```sh
