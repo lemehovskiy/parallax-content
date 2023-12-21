@@ -1,6 +1,6 @@
 {
   "name": "parallax_content",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "VanillaJS parallax content plugin",
   "types": "./dist/index.d.ts",
   "main": "./dist/parallaxContent.umd.js",
